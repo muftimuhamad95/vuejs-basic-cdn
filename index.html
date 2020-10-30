@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <title>VueCDN</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <img src="img/logo.png" alt="logo" style="width: 60px; height: 60px;">
+            <h1>Vue CDN</h1>
+            <p>The Progresive JS Framework</p>
+            <h1> * Js expression</h1>
+            <h2>{{name}}</h2>
+            <h1> * Operasi matematika js expression</h1>
+            <h2>{{1+1}}</h2>
+            <h1> * Ternary expression</h1>
+            <h2>{{isActive ? 'Success' : 'Error'}}</h2>
+            <h1> * Methods</h1>
+            <h2>{{ getname() }}</h2>
+            <h2>{{ ubahNama() }}</h2>
+            <h1> * Computed</h1>
+            <h2>{{ totalBayar }}</h2>
+            <h2>{{ namaLengkap }}</h2>
+            <h2>{{ bilangan }}</h2>
+            <h3>Bilangan ini {{ infoBilangan }}</h3>
+            <h1>* Directive</h1>
+            <h2 v-text="vtext"></h2>
+            <h2 v-html="link"></h2>
+            <h1>* Directive Binding</h1>
+            <h3 v-text="namaDepan.toUpperCase()"></h3>
+            <h1>* Atribut Binding</h1>
+            <img v-bind:src="image" alt="image" style="width: 300px; height: 170px;">
+            <h1> * Events</h1>
+            <h3>{{ bilangan }}</h3>
+            <h3>Bilangan ini {{ infoBilangan }}</h3>
+            <button v-on:click="{{handleJumlah()}}">+</button>
+            <button v-on:click="{{handleKurang()}}" disabled="{{bilangan < 0? true : false}}">-</button>
+        </header>
+        <footer id="footer">
+            <p>Copyrigth 2020</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        const member = {
+                name: "Mufti",
+                message: "Hello World",
+                isActive: true,
+                qty: 1,
+                namaDepan: "Muhamad",
+                namaBelakang: "Mufti",
+                bilangan: 1,
+                vtext: "v-text",
+                link: "<a href='google.com'>Google</a>",
+                image: "img/vuejs.png"
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: member,
+            methods: {
+                getname: function() {
+                    return "Hello " +this.name;
+                },
+                ubahNama: function(namaBaru) {
+                    this.name = namaBaru;
+                    return this.getname()
+                },
+                handleJumlah: function() {
+                    return this.bilangan++;
+                },
+                handleKurang: function() {
+                    return this.bilangan--;
+                }
+            },
+            computed: {
+                totalBayar: function(){
+                    return this.qty * 10000;
+                },
+                namaLengkap: function(){
+                    return this.namaDepan +" "+ this.namaBelakang
+                },
+                infoBilangan: function(){
+                    return this.bilangan%2 == 0? 'genap' : 'ganjil';
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
